@@ -3,14 +3,14 @@ package com.szss.zookeeper.lock;
 import com.szss.zookeeper.lock.exception.ZkLockException;
 
 /**
+ * @author wujing1
+ * @version V1.0
  * @Title: ZookeeperClient.java
  * @Package com.broada.zookeeper.common
  * @Description: 获取锁接口
  * @company broada.com
- * @author wujing1
  * @mail wujing1@broada.com
  * @date 2013-3-30 下午2:34:56
- * @version V1.0
  */
 public interface IDistributedLock {
 

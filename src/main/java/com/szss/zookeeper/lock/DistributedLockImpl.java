@@ -158,7 +158,7 @@ public class DistributedLockImpl implements IDistributedLock {
 
     public void unlock() throws ZkLockException {
         if (currentId == null) {
-            throw new ZkLockException("没有获取到锁，请先获取锁...s");
+            throw new ZkLockException("没有获取到锁，请先获取锁...");
         }
         if (isLocked)
             cleanup();
@@ -207,8 +207,7 @@ public class DistributedLockImpl implements IDistributedLock {
             }
 
             try {
-                List<String> waitLockIds = zkClient.get().getChildren(lockPath,
-                        null);
+                List<String> waitLockIds = zkClient.get().getChildren(lockPath, null);
                 Collections.sort(waitLockIds);
                 int currentIdIndex = waitLockIds.indexOf(currentId);
                 /**

@@ -20,7 +20,7 @@ public class DistributedLockTest extends TestCase {
 
     protected void setUp() throws Exception {
         System.out.println("set up....");
-        ZkServerAddresses zkServerAddresses = new ZkServerAddresses("192.168.16.88:2181");
+        ZkServerAddresses zkServerAddresses = new ZkServerAddresses("127.0.0.1:2181");
         zkClient = new ZooKeeperClient(zkServerAddresses,5000);
     }
 
@@ -77,10 +77,12 @@ public class DistributedLockTest extends TestCase {
         System.out.println("execute testLock....");
         IDistributedLock  lock = new DistributedLockImpl(zkClient, "/config");
         lock.lock();
+        System.out.println(lock.lockInfo());
         lock.unlock();
         System.out.println(lock.lockInfo());
         IDistributedLock  lock1 = new DistributedLockImpl(zkClient, "/config");
-        if(lock1.tryLock(1000))
+        Boolean tryLock=lock1.tryLock(1000);
+        if(!tryLock)
             lock1.lock();
         System.out.println(lock1.lockInfo());
     }
@@ -89,6 +91,7 @@ public class DistributedLockTest extends TestCase {
     /**
      * 多个锁竞争同一资源
      */
+    @Test
     public void testNLockCompetition(){
         IDistributedLock  lock1 = new DistributedLockImpl(zkClient, "/config");
         IDistributedLock  lock2 = new DistributedLockImpl(zkClient, "/config");
@@ -138,6 +141,7 @@ public class DistributedLockTest extends TestCase {
     /**
      * 多个锁竞争同一资源
      */
+    @Test
     public void testLockCompetition(){
         System.out.println("execute testLock....");
         int numOfThread = 9;

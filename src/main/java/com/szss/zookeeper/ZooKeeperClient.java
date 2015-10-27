@@ -13,14 +13,14 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeoutException;
 
 /**
+ * @author wujing1
+ * @version V1.0
  * @Title: ZookeeperClient.java
  * @Package com.broada.zookeeper.common
  * @Description: zookeeper 客户端
  * @company broada.com
- * @author wujing1
  * @mail wujing1@broada.com
  * @date 2013-3-29 下午4:55:13
- * @version V1.0
  */
 public class ZooKeeperClient {
 
@@ -39,7 +39,7 @@ public class ZooKeeperClient {
 
     private final Set<Watcher> watchers = Collections.synchronizedSet(new HashSet<Watcher>());
 
-    public ZooKeeperClient(ZkServerAddresses zkServerAddresses,int sessionTimeout){
+    public ZooKeeperClient(ZkServerAddresses zkServerAddresses, int sessionTimeout) {
         this.zkServerAddresses = zkServerAddresses;
         this.sessionTimeout = sessionTimeout;
     }
@@ -47,6 +47,7 @@ public class ZooKeeperClient {
     /**
      * 获取到 zookeeper 集群的一个链接，如有现有链接直接返回即可
      * 尽量复用已有链接
+     *
      * @return
      * @throws InterruptedException
      * @throws TimeoutException

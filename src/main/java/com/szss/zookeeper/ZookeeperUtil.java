@@ -42,15 +42,16 @@ public class ZookeeperUtil {
 
     /**
      * 将不含锁标记的节点过滤掉，并将等待的 锁Ids 从小到大排序
+     *
      * @param currentedIds 某个lockPath 下所有的子节点，我们所需要的只是 含有锁标记的几点
      * @return 已排序的 等待获取锁的Ids(已排序)
      */
-    public static List<String> getAllSortedLockIds(List<String> currentedIds){
-        List<String> waitedIds  = new ArrayList<String>(currentedIds.size());
+    public static List<String> getAllSortedLockIds(List<String> currentedIds) {
+        List<String> waitedIds = new ArrayList<String>(currentedIds.size());
         for (String currentId : currentedIds) {
             int index = currentId.indexOf(ZkConstants.ZK_BROADA_LOCK_MARKUP.substring(1));
-            if(index >= 0){
-                waitedIds.add(currentId.substring(index+ZkConstants.ZK_BROADA_LOCK_MARKUP.substring(1).length()));
+            if (index >= 0) {
+                waitedIds.add(currentId.substring(index + ZkConstants.ZK_BROADA_LOCK_MARKUP.substring(1).length()));
             }
         }
         Collections.sort(waitedIds);
